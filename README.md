@@ -95,3 +95,63 @@ $ npm install --save-dev typescript awesome-typescript-loader source-map-loader
   "include": ["src/**/*"]
 }
 ```
+
+### 简单实践代码
+
+1.在 components 文件夹下创建 hello.tsx 文件，类容如下:
+
+```tsx
+import * as React from "react";
+
+export interface HelloProps {
+  compiler: string;
+  framework: string;
+}
+
+export const Hello = (hello: HelloProps) => {
+  return (
+    <h1>
+      Hello from {hello.compiler} and {hello.framework}!
+    </h1>
+  );
+};
+```
+
+2.在 src 文件夹下添加 index.tsx 文件，如下所示:
+
+```tsx
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+
+import { Hello } from "./components/hello";
+
+ReactDOM.render(
+  <Hello compiler="Typescript" framework="React"></Hello>,
+  document.getElementById("example")
+);
+```
+
+3.在项目文件夹中添加一个 index.html 文件，内容如下:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typescript React</title>
+  </head>
+
+  <body>
+    <!-- id和上面index.tsx中对应 -->
+    <div id="example"></div>
+
+    <!-- Dependencies 暂时从node_modules中引入，后续可通过cdn等别的方式-->
+    <script src="./node_modules/react/umd/react.development.js"></script>
+    <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+
+    <!-- Main 现在不存在，后续编译出来的js文件，先写个位置-->
+    <script src="./dist/bundle.js"></script>
+  </body>
+</html>
+```
