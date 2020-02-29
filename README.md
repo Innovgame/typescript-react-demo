@@ -2,11 +2,10 @@
 
 > 开始前: 开发 react 项目，`create-react-app`已经非常好用了，为啥要用`wepack+typescript` 纯属`个人爱好～`, 比较青睐`Typescript` :) 。
 
-**react 项目架构图**
-
-- Redux 作为应用的数据存储作用，可以在应用中共享，也可以是持久化的数据
-- React-Router 作为前端应用的路由，负责不同页面之间的跳转，区别于后端实现的路由
-- React-Component 用于呈现网页的不同页面，是前端模块化的体现
+- react 项目网页结构图
+  - Redux 作为应用的数据存储作用，可以在应用中共享，也可以是持久化的数据
+  - React-Router 作为前端应用的路由，负责不同页面之间的跳转，区别于后端实现的路由
+  - React-Component 用于呈现网页的不同页面，是前端模块化的体现
 
 ![React架构图](md/img/截屏2020-02-29下午5.42.06.png)
 
@@ -155,3 +154,63 @@ ReactDOM.render(
   </body>
 </html>
 ```
+
+### 创建一个 webpack 配置文件
+
+在工程根目录下创建一个 webpack.config.js 文件
+
+> 大家可能对 externals 字段有所疑惑。 我们想要避免把所有的 React 都放到一个文件里，因为会增加编译时间并且浏览器还能够缓存没有发生改变的库文件。
+> 理想情况下，我们只需要在浏览器里引入 React 模块，但是大部分浏览器还没有支持模块。 因此大部分代码库会把自己包裹在一个单独的全局变量内，比如：jQuery 或\_。 这叫做“命名空间”模式，webpack 也允许我们继续使用通过这种方式写的代码库。 通过我们的设置"react": "React"，webpack 会神奇地将所有对"react"的导入转换成从 React 全局变量中加载。
+
+```javascript
+module.exports = {
+  entry: "./src/index.tsx",
+  output: {
+    filename: "bundle.js",
+    path: __dirname + "/dist"
+  },
+  // Enable sourcemaps for debugging webpack's output.
+  devtool: "source-map",
+  mode: "development",
+  resolve: {
+    // Add '.ts' and '.tsx' as resolvable extensions.
+    extensions: [".ts", ".tsx", ".js", ".json"]
+  },
+  module: {
+    rules: [
+      // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+      {
+        test: /\.tsx?$/,
+        loader: "awesome-typescript-loader"
+      },
+      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      {
+        enforce: "pre",
+        test: /\.js?$/,
+        loader: "source-map-loader"
+      }
+    ]
+  },
+  // When importing a module whose path matches one of the following, just
+  // assume a corresponding global variable exists and use that instead.
+  // This is important because it allows us to avoid bundling all of our
+  // dependencies, which allows browsers to cache those libraries between builds.
+  externals: {
+    react: "React",
+    "react-dom": "ReactDOM"
+  }
+};
+```
+
+### 编译
+
+上面所有的工作就是为了最后这一步，在命令行输入：
+
+```sh
+# webpack编译输出dist文件夹中
+$ webpack
+```
+
+大功告成，打开网页如下图所示 :)
+
+![截屏2020-02-29下午11.12.05](/Users/uzhujia003/DDD/2020/ts-demo/md/img/截屏2020-02-29下午11.12.05.png)
