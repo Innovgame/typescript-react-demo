@@ -75,4 +75,23 @@ npm install --save react react-dom @types/react @types/react-dom
 $ npm install --save-dev typescript awesome-typescript-loader source-map-loader
 ```
 
+### 添加 Typescript 配置文件
 
+> 我们想将 TypeScript 文件整合到一起 - 这包括我们写的源码和必要的声明文件。
+
+```json
+// tsconfig
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "ES6",
+    "target": "es5",
+    "jsx": "react",
+    "lib": ["DOM", "ES2015"],
+    "moduleResolution": "Node"
+  },
+  "include": ["src/**/*"]
+}
+```
