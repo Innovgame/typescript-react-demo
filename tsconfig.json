@@ -2,6 +2,7 @@
     "compilerOptions": {
         "outDir": "./dist/",
         "sourceMap": true,
+        "baseUrl": ".",
         "noImplicitAny": true,
         "module": "ES6",
         "target": "es5",
@@ -14,5 +15,8 @@
     },
     "include": [
         "src/**/*"
+    ],
+    "exclude": [
+        "node_modules/**/*"
     ]
 }
