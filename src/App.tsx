@@ -1,5 +1,11 @@
 import * as React from "react";
 
-import { Hello } from "./components/hello";
+import Main from "./components/main";
+import Header from "./components/header";
 
-export const App = () => <Hello compiler="Typescript" framework="React" />;
+export const App = () => (
+    <div>
+        <Header />
+        <Main />
+    </div>
+);

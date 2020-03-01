@@ -298,6 +298,24 @@ indent_style = space
 
 ```
 
+## 配置 react 路由
+
+### 添加 react-router history
+
+```sh
+# yarn
+$ yarn add react-router @types/react-router history @types/history
+```
+
+1.添加根路由
+
+```tsx
+// Router.tsx
+<Route path="/" component={App} exact={true} />
+```
+
+2.添加 edit 路由
+
 ## Q&A
 
 > [地址](./md/README.md)
