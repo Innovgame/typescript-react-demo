@@ -97,7 +97,7 @@ $ npm install --save-dev typescript awesome-typescript-loader source-map-loader
 
 ### 简单实践代码
 
-1.在 components 文件夹下创建 hello.tsx 文件，类容如下:
+1.在 components 文件夹下创建 hello.tsx 文件，内容如下:
 
 ```tsx
 import * as React from "react";
@@ -214,3 +214,15 @@ $ webpack
 大功告成，打开网页如下图所示 :)
 
 ![截屏2020-02-29下午11.12.05](/md/img/截屏2020-02-29下午11.12.05.png)
+
+## Q&A
+
+> [地址](./md/README.md)
+
+收集项目中遇到的问题及解决方案
+
+## 引用
+
+> 本项目过程中参考了以下内容，感谢作者们的分享
+
+- [TypeScript 中文手册](https://typescript.bootcss.com/tutorials/react-&-webpack.html)
