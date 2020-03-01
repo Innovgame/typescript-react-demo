@@ -37,7 +37,7 @@ $ npm init
 
 - 创建目录结构
 
-```
+```folder
 # 项目目录结构
 project/
 ├─ dist/
@@ -214,6 +214,89 @@ $ webpack
 大功告成，打开网页如下图所示 :)
 
 ![截屏2020-02-29下午11.12.05](/md/img/截屏2020-02-29下午11.12.05.png)
+
+## 项目配置
+
+### 代码规范
+
+> 代码规范，每个公司可能都不一样，添加 tslint 配置你项目的代码规范
+
+1.安装 tslint tslint-react
+
+> 下面使用 yarn 安装，和 npm 使用一致
+
+```sh
+# [yarn add] 安装 [--dev] 添加到 package.json devDependencies
+$ yarn add tslint tslint-react --dev
+```
+
+2.项目目录下创建 tslint.json 可以使用命令: `yarn tslint --init`自动创建一个
+
+```json
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:latest", "tslint-react"],
+  "jsRules": {},
+  "rules": {
+    "no-console": true,
+    "quotemark": [false, "single"],
+    "eofline": true,
+    "indent": [false]
+  },
+  "rulesDirectory": [],
+  "linterOptions": {
+    "exclude": ["node_modules/**"]
+  }
+}
+```
+
+3.启动 tslint 检查并自动 fix
+
+```sh
+# 调用tslint
+$ yarn tslint -c tslint.json './src/**/*.{ts,tsx}' --fix
+```
+
+### 配置 husky 提交时候检查
+
+在 package.json 配置 husky: git commit 和 git push 时候启动 tslint 检查，fix 不过，不能提交(谨慎使用)
+
+`package.json配置如下:`
+
+```diff
+{
++  "husky": {
++    "hooks": {
++      "pre-commit": "yarn tslint -c tslint.json './src/**/*.{ts,tsx}' --fix",
++      "pre-push": "yarn tslint -c tslint.json './src/**/*.{ts,tsx}' --fix"
++    }
++  }
+}
+```
+
+### 编辑器配置
+
+可以修改 vscode 编辑器当前项目的缩进等其他设置，完全看个人爱好，项目目录下增加 `.editorconfig`, 格式类似于 toml
+简单配置:
+
+```toml
+[*]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+
+[*.md]
+trim_trailing_whitespace = false
+indent_size = 2
+indent_style = space
+
+[{package.json,package-lock.json}]
+indent_size = 2
+indent_style = space
+
+```
 
 ## Q&A
 

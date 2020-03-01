@@ -1,0 +1,25 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:latest",
+        "tslint-react"
+    ],
+    "jsRules": {},
+    "rules": {
+        "no-console": true,
+        "quotemark": [
+            false,
+            "single"
+        ],
+        "eofline": true,
+        "indent": [
+            false
+        ]
+    },
+    "rulesDirectory": [],
+    "linterOptions": {
+        "exclude": [
+            "node_modules/**"
+        ]
+    }
+}
